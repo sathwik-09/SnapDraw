@@ -6,10 +6,12 @@ import bcrypt from "bcrypt";
 import { middleware } from "./middleware";
 import {SigninSchema, SignupSchema, CreateRoomSchema} from "@repo/common/types"
 import { prismaClient } from "@repo/db/client";
-import { Request, Response } from "express";
+import { Request, Response } from "express"; 
+import cors from "cors";
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 const saltRounds = 10; 
 
@@ -116,6 +118,44 @@ app.post("/room", middleware, async (req, res) => {
     })
   }
 });
+
+
+app.get("/chats/:roomId", async (req: Request, res: Response) =>{
+  try {
+    
+    const roomId = Number(req.params.roomId);
+    const messages = await prismaClient.chat.findMany({
+      where: {
+        roomId: roomId
+      },
+      orderBy:{
+        id: "desc"
+      },
+      take: 50
+    })
+    res.json({
+      messages
+    })
+  }
+  catch(e) {
+    console.error(e);
+    message: {"oops"}
+  }
+
+}) 
+
+app.get("/room/:slug", async (req: Request, res: Response) =>{
+  const slug = req.params.slug;
+  const room = await prismaClient.room.findFirst({
+    where: {
+      slug
+    }
+  })
+  res.json({
+    room
+  })
+
+}) 
 
 
 app.listen(3001);
