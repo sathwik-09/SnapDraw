@@ -72,10 +72,7 @@ wss.on('connection', function connection(ws, request) {
       if(parsedData.type === "leave_room") {
         user.rooms = user?.rooms.filter((x) => x !== parsedData.room)
       }
-
-      console.log("message received");
-      console.log(parsedData);
-
+      
       if(parsedData.type === "chat"){
         const roomId = Number(parsedData.roomId);
         const message = parsedData.message;
