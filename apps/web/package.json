@@ -12,18 +12,20 @@
   },
   "dependencies": {
     "@repo/ui": "workspace:*",
+    "axios": "^1.8.4",
+    "dotenv": "^16.4.5",
     "next": "^15.2.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
   "devDependencies": {
+    "@repo/common": "workspace:*",
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
     "@types/node": "^22.13.10",
     "@types/react": "19.0.12",
     "@types/react-dom": "19.0.4",
     "eslint": "^9.23.0",
-    "typescript": "5.8.2",
-    "@repo/common": "workspace:*"
+    "typescript": "5.8.2"
   }
 }
