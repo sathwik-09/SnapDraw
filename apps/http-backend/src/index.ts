@@ -37,6 +37,8 @@ app.post("/signup",  async(req, res) => {
     })
   }
   catch(e) {
+    console.error(e);
+    return res.status(500).json({ message: "Oops" });
     res.status(411).json({
       message: "User already exists with this username"
     })
@@ -113,6 +115,8 @@ app.post("/room", middleware, async (req, res) => {
     }); 
   } 
   catch(e) {
+    console.error(e);
+    return res.status(500).json({ message: "Oops" });
     res.status(500).json({
       message: "Room already exists with this name"
     })
@@ -138,6 +142,8 @@ app.get("/chats/:roomId", async (req: Request, res: Response) =>{
     })
   }
   catch(e) {
+    console.error(e);
+    return res.status(500).json({ message: "Oops" });
     console.error(e);
     message: {"oops"}
   }
